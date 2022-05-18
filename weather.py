@@ -24,9 +24,7 @@ def convert_date(iso_string):
     Returns:
         A date formatted like: Weekday Date Month Year e.g. Tuesday 06 July 2021
     """
-
-    d = datetime.fromisoformat(iso_string)
-    return f"{d.strftime('%A')} {d.strftime('%d')} {d.strftime('%B')} {d.year}" 
+    return datetime.fromisoformat(iso_string).strftime("%A %d %B %Y")
 
 
 def convert_f_to_c(temp_in_farenheit):
@@ -60,7 +58,6 @@ def load_data_from_csv(csv_file):
     Returns:
         A list of lists, where each sublist is a (non-empty) line in the csv file.
     """
-    
     data_list = []
     with open(csv_file) as csv_file:
         reader = csv.reader(csv_file)
@@ -82,14 +79,12 @@ def find_min(weather_data):
     Returns:
         The minimum value and its position in the list.
     """
-
     if not weather_data:
         return ()
     min_temp = min(weather_data)
     last_position = max(idx for idx, val in enumerate(weather_data) if val == min_temp)
-    min_temp_float = float(min_temp)
-    return (min_temp_float, last_position)
-    
+    return (float(min_temp), last_position)  
+
 
 def find_max(weather_data):
     """Calculates the maximum value in a list of numbers.
@@ -114,7 +109,6 @@ def generate_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-    
     total_days = len(weather_data)
     dates = [x[0] for x in weather_data]
     min_temps = [x[1] for x in weather_data]
@@ -138,7 +132,6 @@ def generate_daily_summary(weather_data):
     Returns:
         A string containing the summary information.
     """
-
     daily_summary = ''
     for day in weather_data:
         date  = f"---- {convert_date(day[0])} ----\n"
