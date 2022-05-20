@@ -121,7 +121,12 @@ def generate_summary(weather_data):
     av_low       = format_temperature(convert_f_to_c(calculate_mean(min_temps)))
     av_high      = format_temperature(convert_f_to_c(calculate_mean(max_temps)))
 
-    return f"{total_days} Day Overview\n  The lowest temperature will be {lowest_temp}, and will occur on {lowest_date}.\n  The highest temperature will be {highest_temp}, and will occur on {highest_date}.\n  The average low this week is {av_low}.\n  The average high this week is {av_high}.\n"
+    return f'''{total_days} Day Overview
+  The lowest temperature will be {lowest_temp}, and will occur on {lowest_date}.
+  The highest temperature will be {highest_temp}, and will occur on {highest_date}.
+  The average low this week is {av_low}.
+  The average high this week is {av_high}.
+'''
 
 
 def generate_daily_summary(weather_data):
@@ -134,9 +139,9 @@ def generate_daily_summary(weather_data):
     """
     daily_summary = ''
     for day in weather_data:
-        date  = f"---- {convert_date(day[0])} ----\n"
-        min_t = f"  Minimum Temperature: {format_temperature(convert_f_to_c(day[1]))}\n"
-        max_t = f"  Maximum Temperature: {format_temperature(convert_f_to_c(day[2]))}\n"
-        daily_summary = daily_summary + date + min_t + max_t + '\n'
+        date  = f'---- {convert_date(day[0])} ----\n'
+        min_t = f'  Minimum Temperature: {format_temperature(convert_f_to_c(day[1]))}\n'
+        max_t = f'  Maximum Temperature: {format_temperature(convert_f_to_c(day[2]))}\n'
+        daily_summary += date + min_t + max_t + '\n'
     return daily_summary
 
